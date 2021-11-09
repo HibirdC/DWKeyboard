@@ -112,10 +112,10 @@ const int line3Value[InputDialogView::ViewMask][11] = {
     {Key_Pager, Qt::Key_Apostrophe, Key_ApostropheRight, Qt::Key_QuoteDbl, Key_QuoteDblRight, Qt::Key_Comma, 	Qt::Key_Period, Qt::Key_Slash, Qt::Key_Bar, Qt::Key_Backslash, Key_Pager},
     {Key_Pager, Qt::Key_ParenLeft, Qt::Key_ParenRight, Qt::Key_BracketLeft, Qt::Key_BracketRight, Qt::Key_BraceLeft, Qt::Key_BraceRight, Qt::Key_Less, Qt::Key_Greater, Qt::Key_Question, Key_Pager}
 };
-const int line4Value[InputDialogView::ViewMask][6] = {
-    {Key_SwitchNumber, Key_SwitchLanguage, Qt::Key_Space, Qt::Key_Question, Key_Other, Key_Exit},
-    {Key_SwitchABC, Key_SwitchLanguage, Qt::Key_Space, Qt::Key_Period, Key_Other, Key_Exit},
-    {Key_SwitchABC, Key_SwitchLanguage, Qt::Key_Space, Qt::Key_Period, Key_Other, Key_Exit}
+const int line4Value[InputDialogView::ViewMask][5] = {
+    {Key_SwitchNumber, Key_SwitchLanguage, Qt::Key_Space, Qt::Key_Question, Key_Exit},
+    {Key_SwitchABC, Key_SwitchLanguage, Qt::Key_Space, Qt::Key_Period, Key_Exit},
+    {Key_SwitchABC, Key_SwitchLanguage, Qt::Key_Space, Qt::Key_Period, Key_Exit}
 };
 
 void InputDialogView::InitControl()
@@ -170,7 +170,7 @@ void InputDialogView::InitControl()
     }
 
     // 第四行
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         m_btnLine4[i] = new QPushButton(m_backgroud);
         m_btnLine4[i]->setUserData(Qt::UserRole, new KeyBoardData(line4Value[m_ViewMode][i]));
@@ -447,17 +447,16 @@ void InputDialogView::Layout()
         int ax = margin;
         int ay = margin_top + (btnHeight + padding);
 
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 5; i++)
         {
             int aw = 0;
             switch (i)
             {
             case 0:	aw = btnWidth * 1.5;	break;
             case 1:	aw = btnWidth * 2.3;	break;
-            case 2:	aw = btnWidth * 4.2;	break;
+            case 2:	aw = btnWidth * 5.5;	break;
             case 3:	aw = btnWidth;			break;
-            case 4:	aw = btnWidth;			break;
-            case 5:	aw = wid - margin - ax; break;
+            case 4:	aw = wid - margin - ax; break;
             }
             m_btnLine4[i]->setGeometry(ax, ay, aw, btnHeight);
             ax += aw + padding;
@@ -516,17 +515,16 @@ void InputDialogView::Layout()
         int ax = margin;
         int ay = margin_top + (btnHeight + padding)*3;
 
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 5; i++)
         {
             int aw = 0;
             switch (i)
             {
             case 0:	aw = btnWidth * 1.5;	break;
             case 1:	aw = btnWidth * 2.3;	break;
-            case 2:	aw = btnWidth * 4.2;	break;
+            case 2:	aw = btnWidth * 5.5;	break;
             case 3:	aw = btnWidth;			break;
-            case 4:	aw = btnWidth;			break;
-            case 5:	aw = wid - margin - ax;break;
+            case 4:	aw = wid - margin - ax;break;
             }
             m_btnLine4[i]->setGeometry(ax, ay, aw, btnHeight);
             ax += aw + padding;
@@ -612,7 +610,7 @@ void InputDialogView::SwitchViewMode(InputDialogView::ViewMode mode)
     }
 
     // 第四行
-    for (int i = 0; i < 6; i++)
+    for (int i = 0; i < 5; i++)
     {
         if (m_btnLine4[i])
         {

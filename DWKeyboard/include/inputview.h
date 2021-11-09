@@ -85,7 +85,7 @@ private:
 	QPushButton* m_btnLine1[11];// 第一行按钮组
 	QPushButton* m_btnLine2[10];// 第一行按钮组
 	QPushButton* m_btnLine3[11];// 第一行按钮组
-	QPushButton* m_btnLine4[6];	// 第一行按钮组
+    QPushButton* m_btnLine4[5];	// 第一行按钮组
 	QList<QPushButton*>	m_AllbtnList;	// 全部按钮集合
 	QListWidget* m_ListWidget;	// 提示器
 	InputDialogView::ViewMode m_ViewMode;
