@@ -3,6 +3,7 @@
 #include <QFontDatabase>
 #include <QApplication>
 #include <KeyboardGlobal.h>
+#include <QDebug>
 
 namespace QtVirtualKeyboard {
 
@@ -413,71 +414,124 @@ void InputDialogView::Layout()
     QFont deffont("Sans");
     deffont.setPixelSize(width()/40);
 
-    m_backgroud->setGeometry(0, 0, width(), height());
-    m_backgroud->setFixedSize(width(), height());
-    m_backgroud->setFont(deffont);
-
-    double hei = height();
-    double wid = width();
-    double margin = wid * 3 / 70;	// 左右边缘
-		double margin_top = margin*1.5;	// 上边缘
-		double padding = hei * 1 / 25;	// 间隔
-    double margin_bottom = padding;// 下边缘
-
-    const double btnHeight = (hei - margin_top - margin_bottom - 3 * padding)/4;
-    const double btnWidth = (wid - margin*2 - padding*10)/11;
-
-    m_ListWidget->setGeometry(0, 0, width(), margin_top - padding);
-    m_ListWidget->setFont(deffont);
-    // 第一行
-    for (int i = 0; i < 11; i++)
+    if(m_ViewMode == ViewNum0)
     {
-        int ax = margin + i * (btnWidth+padding);
-        int ay = margin_top;
-        m_btnLine1[i]->setGeometry(ax, ay, btnWidth, btnHeight);
-        m_btnLine1[i]->setFont(deffont);
-    }
+        int oriHeight = height()/2;
+        int oriWidth = width();
+        m_backgroud->setGeometry(0, 0, oriWidth, oriHeight*1.1);
+        m_backgroud->setFixedSize(oriWidth, oriHeight*1.1);
+        m_backgroud->setFont(deffont);
 
-    // 第二行
-    for (int i = 0; i < 10; i++)
-    {
-        int ax = margin + i * (btnWidth+padding) + btnWidth / 2;
-        int ay = margin_top + btnHeight + padding;
-        switch (i)
+        double hei = height();
+        double wid = width();
+        double margin = wid * 3 / 100;	// 左右边缘
+        double margin_top = margin;	// 上边缘
+        double padding = hei * 1 / 25;	// 间隔
+        double margin_bottom = padding;// 下边缘
+
+        const double btnHeight = (hei - margin_top - margin_bottom - 3 * padding)/4;
+        const double btnWidth = (wid - margin*2 - padding*10)/11;
+
+        m_ListWidget->setGeometry(0, 0, width(), margin_top - padding);
+        m_ListWidget->setFont(deffont);
+        // 第一行
+        for (int i = 0; i < 11; i++)
         {
-        case 9:	m_btnLine2[i]->setGeometry(ax, ay, btnWidth * 3 / 2 + padding, btnHeight);break;
-        default:m_btnLine2[i]->setGeometry(ax, ay, btnWidth, btnHeight);break;
+            int ax = margin + i * (btnWidth+padding);
+            int ay = margin_top;
+            m_btnLine1[i]->setGeometry(ax, ay, btnWidth, btnHeight);
+            m_btnLine1[i]->setFont(deffont);
         }
-        m_btnLine2[i]->setFont(deffont);
-    }
 
-    // 第三行
-    for (int i = 0; i < 11; i++)
-    {
-        int ax = margin + i * (btnWidth+padding);
-        int ay = margin_top + (btnHeight + padding)*2;
-        m_btnLine3[i]->setGeometry(ax, ay, btnWidth, btnHeight);
-        m_btnLine3[i]->setFont(deffont);
-    }
-    // 第四行
-    int ax = margin;
-    int ay = margin_top + (btnHeight + padding)*3;
+        // 第四行
+        int ax = margin;
+        int ay = margin_top + (btnHeight + padding);
 
-    for (int i = 0; i < 6; i++)
-    {
-        int aw = 0;
-        switch (i)
+        for (int i = 0; i < 6; i++)
         {
-        case 0:	aw = btnWidth * 1.5;	break;
-        case 1:	aw = btnWidth * 2.3;	break;
-        case 2:	aw = btnWidth * 4.2;	break;
-        case 3:	aw = btnWidth;			break;
-        case 4:	aw = btnWidth;			break;
-        case 5:	aw = wid - margin - ax;break;
+            int aw = 0;
+            switch (i)
+            {
+            case 0:	aw = btnWidth * 1.5;	break;
+            case 1:	aw = btnWidth * 2.3;	break;
+            case 2:	aw = btnWidth * 4.2;	break;
+            case 3:	aw = btnWidth;			break;
+            case 4:	aw = btnWidth;			break;
+            case 5:	aw = wid - margin - ax; break;
+            }
+            m_btnLine4[i]->setGeometry(ax, ay, aw, btnHeight);
+            ax += aw + padding;
+            m_btnLine4[i]->setFont(deffont);
         }
-        m_btnLine4[i]->setGeometry(ax, ay, aw, btnHeight);
-        ax += aw + padding;
-        m_btnLine4[i]->setFont(deffont);
+    }
+    else
+    {
+        m_backgroud->setGeometry(0, 0, width(), height());
+        m_backgroud->setFixedSize(width(), height());
+        m_backgroud->setFont(deffont);
+
+        double hei = height();
+        double wid = width();
+        double margin = wid * 3 / 100;	// 左右边缘
+        double margin_top = margin*1.5;	// 上边缘
+        double padding = hei * 1 / 25;	// 间隔
+        double margin_bottom = padding;// 下边缘
+
+        const double btnHeight = (hei - margin_top - margin_bottom - 3 * padding)/4;
+        const double btnWidth = (wid - margin*2 - padding*10)/11;
+
+        m_ListWidget->setGeometry(0, 0, width(), margin_top - padding);
+        m_ListWidget->setFont(deffont);
+        // 第一行
+        for (int i = 0; i < 11; i++)
+        {
+            int ax = margin + i * (btnWidth+padding);
+            int ay = margin_top;
+            m_btnLine1[i]->setGeometry(ax, ay, btnWidth, btnHeight);
+            m_btnLine1[i]->setFont(deffont);
+        }
+
+        // 第二行
+        for (int i = 0; i < 10; i++)
+        {
+            int ax = margin + i * (btnWidth+padding) + btnWidth / 2;
+            int ay = margin_top + btnHeight + padding;
+            switch (i)
+            {
+            case 9:	m_btnLine2[i]->setGeometry(ax, ay, btnWidth * 3 / 2 + padding, btnHeight);break;
+            default:m_btnLine2[i]->setGeometry(ax, ay, btnWidth, btnHeight);break;
+            }
+            m_btnLine2[i]->setFont(deffont);
+        }
+
+        // 第三行
+        for (int i = 0; i < 11; i++)
+        {
+            int ax = margin + i * (btnWidth+padding);
+            int ay = margin_top + (btnHeight + padding)*2;
+            m_btnLine3[i]->setGeometry(ax, ay, btnWidth, btnHeight);
+            m_btnLine3[i]->setFont(deffont);
+        }
+        // 第四行
+        int ax = margin;
+        int ay = margin_top + (btnHeight + padding)*3;
+
+        for (int i = 0; i < 6; i++)
+        {
+            int aw = 0;
+            switch (i)
+            {
+            case 0:	aw = btnWidth * 1.5;	break;
+            case 1:	aw = btnWidth * 2.3;	break;
+            case 2:	aw = btnWidth * 4.2;	break;
+            case 3:	aw = btnWidth;			break;
+            case 4:	aw = btnWidth;			break;
+            case 5:	aw = wid - margin - ax;break;
+            }
+            m_btnLine4[i]->setGeometry(ax, ay, aw, btnHeight);
+            ax += aw + padding;
+            m_btnLine4[i]->setFont(deffont);
+        }
     }
 }
 // 切换语言输入法
@@ -541,21 +595,29 @@ void InputDialogView::SwitchViewMode(InputDialogView::ViewMode mode)
     for (int i = 0; i < 10; i++)
     {
         if (m_btnLine2[i])
+        {
+            m_btnLine2[i]->setVisible(mode != ViewNum0);
             m_btnLine2[i]->setUserData(Qt::UserRole, new KeyBoardData(line2Value[m_ViewMode][i]));
+        }
     }
 
     // 第三行
     for (int i = 0; i < 11; i++)
     {
         if (m_btnLine3[i])
+        {
+            m_btnLine3[i]->setVisible(mode != ViewNum0);
             m_btnLine3[i]->setUserData(Qt::UserRole, new KeyBoardData(line3Value[m_ViewMode][i]));
+        }
     }
 
     // 第四行
     for (int i = 0; i < 6; i++)
     {
         if (m_btnLine4[i])
+        {
             m_btnLine4[i]->setUserData(Qt::UserRole, new KeyBoardData(line4Value[m_ViewMode][i]));
+        }
     }
 
     ResetButtonStyle();
@@ -563,6 +625,7 @@ void InputDialogView::SwitchViewMode(InputDialogView::ViewMode mode)
     InputContextBase->setCapsLock(false);
     UpdateWordCandidate();
     InitTextAndIcon();
+    Layout();
 }
 
 // 键盘退出
