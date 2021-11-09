@@ -255,7 +255,7 @@ void InputDialogView::ResetButtonStyle()
                 //btn->setStyleSheet("QPushButton{image: url(:/QtQuick/VirtualKeyboard/content/styles/default/images/hidekeyboard-868482.svg);}");
                 break;
             case Key_SwitchLanguage:
-                btn->setStyleSheet("QPushButton{image: url(:/QtQuick/VirtualKeyboard/content/styles/default/images/globe-868482.svg);}");
+                //btn->setStyleSheet("QPushButton{image: url(:/QtQuick/VirtualKeyboard/content/styles/default/images/globe-868482.svg);}");
                 break;
 				case Key_Pager:
 					btn->setStyleSheet(QString("QPushButton{background:%1;}\
@@ -396,7 +396,7 @@ QString InputDialogView::GetValueText(int key, bool bshift, bool bcaplock, Input
     case Qt::Key_Space:		return QStringLiteral(" ");break;						// 切换语言键
     case Key_SwitchNumber:	return QStringLiteral("&&123");break;					// 切换数字键
     case Key_SwitchABC:		return QStringLiteral("&&ABC");break;					// 切换字母键
-    case Key_SwitchLanguage:return QStringLiteral("");break;						// 切换语言键
+    case Key_SwitchLanguage:return QStringLiteral("中文/英文");break;						// 切换语言键
     case Key_Other:			return QStringLiteral(":-)");break;						//
     case Key_Exit:			return QStringLiteral("退出");break;						// 退出键盘按键
     }
@@ -469,8 +469,8 @@ void InputDialogView::Layout()
         switch (i)
         {
         case 0:	aw = btnWidth * 1.5;	break;
-        case 1:	aw = btnWidth;			break;
-        case 2:	aw = btnWidth * 5.5;	break;
+        case 1:	aw = btnWidth * 2.3;	break;
+        case 2:	aw = btnWidth * 4.2;	break;
         case 3:	aw = btnWidth;			break;
         case 4:	aw = btnWidth;			break;
         case 5:	aw = wid - margin - ax;break;
