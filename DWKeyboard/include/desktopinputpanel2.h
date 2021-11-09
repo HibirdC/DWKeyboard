@@ -55,6 +55,7 @@ public:
 
     void setInputRect(const QRect &inputRect);
 	bool eventFilter(QObject *object, QEvent *event);
+    void setOnlyNumber(bool only);
 public slots:
     void createView();
     void destroyView();

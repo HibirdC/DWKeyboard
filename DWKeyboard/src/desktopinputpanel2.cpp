@@ -365,4 +365,11 @@ bool DesktopInputPanel2::eventFilter(QObject *object, QEvent *event)
     return false;
 }
 
+void DesktopInputPanel2::setOnlyNumber(bool only)
+{
+    Q_D(DesktopInputPanel2);
+    if (d->view.isNull()/* || d->keyboardRect.isEmpty()*/)
+        return;
+    d->view->SetOnlyNumer(only);
+}
 } // namespace QtVirtualKeyboard

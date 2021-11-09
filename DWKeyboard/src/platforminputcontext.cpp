@@ -307,4 +307,10 @@ void PlatformInputContext::FocusOut(QObject* obj)
     hideInputPanel();
 }
 
+void PlatformInputContext::SetOnlyNumber(bool only)
+{
+    if (!m_inputPanel)
+        return;
+    m_inputPanel->setOnlyNumber(only);
+}
 } // namespace QtVirtualKeyboard

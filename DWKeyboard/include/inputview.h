@@ -80,6 +80,7 @@ public:
 	QList<QPushButton*> GetButtonList(int key);
 	InputDialogView::ViewMode GetViewMode(){	return m_ViewMode;	}
 	void SwitchViewMode(InputDialogView::ViewMode mode);
+    void SetOnlyNumer(bool only);
 private:
 	QWidget*	 m_backgroud;	// 背景
 	QPushButton* m_btnLine1[11];// 第一行按钮组

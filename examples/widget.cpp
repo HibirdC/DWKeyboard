@@ -33,6 +33,7 @@ bool Widget::eventFilter(QObject *watched, QEvent *event)
 {
     if (event->type()==QEvent::FocusIn)
     {
+        PlatformInputContextBase->SetOnlyNumber(true);
         PlatformInputContextBase->FocusIn(watched);
     }
     else if (event->type()==QEvent::FocusOut)

@@ -120,4 +120,11 @@ void AbstractInputPanel::destroyView()
 {
 }
 
+/*
+ * setting only show number key
+ */
+void AbstractInputPanel::setOnlyNumber(bool only)
+{
+    Q_UNUSED(only);
+}
 } // namespace QtVirtualKeyboard

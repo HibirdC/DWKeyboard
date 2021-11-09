@@ -579,6 +579,12 @@ void InputDialogView::SwitchShiftMode()
     }
 }
 
+//外部调用
+void InputDialogView::SetOnlyNumer(bool only)
+{
+    SwitchViewMode(only?ViewNum0:ViewABC);
+}
+
 // 切换显示模式
 void InputDialogView::SwitchViewMode(InputDialogView::ViewMode mode)
 {
