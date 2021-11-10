@@ -417,11 +417,10 @@ void InputDialogView::Layout()
     if(m_ViewMode == ViewNum0)
     {
         int oriHeight = height()/2;
-        int oriWidth = width();
+        int oriWidth = width()*3/4-5;
         m_backgroud->setGeometry(0, 0, oriWidth, oriHeight*1.1);
         m_backgroud->setFixedSize(oriWidth, oriHeight*1.1);
         m_backgroud->setFont(deffont);
-
         double hei = height();
         double wid = width();
         double margin = wid * 3 / 100;	// 左右边缘
@@ -436,9 +435,17 @@ void InputDialogView::Layout()
         m_ListWidget->setFont(deffont);
         // 第一行
         for (int i = 0; i < 11; i++)
-        {
+        { 
             int ax = margin + i * (btnWidth+padding);
             int ay = margin_top;
+            if(i == 7 || i == 8 || i == 9)
+            {
+                continue;
+            }
+            if(i == 10)
+            {
+                ax = margin + 7 * (btnWidth+padding);
+            }
             m_btnLine1[i]->setGeometry(ax, ay, btnWidth, btnHeight);
             m_btnLine1[i]->setFont(deffont);
         }
@@ -447,20 +454,43 @@ void InputDialogView::Layout()
         int ax = margin;
         int ay = margin_top + (btnHeight + padding);
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 7; i++)
         {
             int aw = 0;
             switch (i)
             {
-            case 0:	aw = btnWidth * 1.5;	break;
-            case 1:	aw = btnWidth * 2.3;	break;
-            case 2:	aw = btnWidth * 5.5;	break;
-            case 3:	aw = btnWidth;			break;
-            case 4:	aw = wid - margin - ax; break;
+            case 0:
+                aw = btnWidth * 2.3-2;
+                m_btnLine4[i]->setGeometry(ax, ay, aw, btnHeight);
+                m_btnLine4[i]->setFont(deffont);
+                break;
+            case 1:
+                aw = btnWidth;
+                m_btnLine1[7]->setGeometry(ax, ay, btnWidth, btnHeight);
+                m_btnLine1[7]->setFont(deffont);
+                break;
+            case 2:
+                aw = btnWidth;
+                m_btnLine1[8]->setGeometry(ax, ay, btnWidth, btnHeight);
+                m_btnLine1[8]->setFont(deffont);
+                break;
+            case 3:
+                aw = btnWidth;
+                m_btnLine1[9]->setGeometry(ax, ay, btnWidth, btnHeight);
+                m_btnLine1[9]->setFont(deffont);
+                break;
+            case 4:
+                aw = btnWidth;
+                m_btnLine4[i-1]->setGeometry(ax, ay, aw, btnHeight);
+                m_btnLine4[i-1]->setFont(deffont);
+                break;
+            case 5:
+                aw = wid*3/4 - margin - ax - 5;
+                m_btnLine4[i-1]->setGeometry(ax, ay, aw, btnHeight);
+                m_btnLine4[i-1]->setFont(deffont);
+                break;
             }
-            m_btnLine4[i]->setGeometry(ax, ay, aw, btnHeight);
             ax += aw + padding;
-            m_btnLine4[i]->setFont(deffont);
         }
     }
     else
@@ -620,6 +650,10 @@ void InputDialogView::SwitchViewMode(InputDialogView::ViewMode mode)
     {
         if (m_btnLine4[i])
         {
+            if(i == 1 || i == 2)
+            {
+                m_btnLine4[i]->setVisible(mode != ViewNum0);
+            }
             m_btnLine4[i]->setUserData(Qt::UserRole, new KeyBoardData(line4Value[m_ViewMode][i]));
         }
     }

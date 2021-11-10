@@ -43,6 +43,7 @@
 #include <QtCore/private/qobject_p.h>
 #include <QtCore/QLibraryInfo>
 #include <qwindow.h>
+#include <QDebug>
 
 namespace QtVirtualKeyboard {
 
@@ -115,11 +116,16 @@ void DesktopInputPanel2::show(QObject* focusobj)
 
             int x = pt.x();
             int y = pt.y() + rc.height() + 1;
+
             int hei = 240;
             int wid = 600;
             if (x + wid > rcScreen.right())
             {
                 x = rcScreen.right() - wid;
+                if(d->view->GetViewMode() == InputDialogView::ViewMode::ViewNum0)
+                {
+                    x = rcScreen.right() - wid + 300;
+                }
             }
             if (x < rcScreen.left())
             {
@@ -129,6 +135,10 @@ void DesktopInputPanel2::show(QObject* focusobj)
             if (y + hei > rcScreen.bottom())
             {
                 y = pt.y() - hei - 1;
+                if(d->view->GetViewMode() == InputDialogView::ViewMode::ViewNum0)
+                {
+                    y = pt.y() - hei/2 - 15;
+                }
             }
             if (y < rcScreen.top())
             {
