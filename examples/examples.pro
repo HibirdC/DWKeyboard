@@ -21,8 +21,10 @@ CONFIG(debug, debug|release){
 }
 INCLUDEPATH += ../DWKeyboard/include
 SOURCES += main.cpp\
+        QGPLineEdit.cpp \
         widget.cpp
 
-HEADERS  += widget.h
+HEADERS  += widget.h \
+    QGPLineEdit.h
 
 FORMS    += widget.ui

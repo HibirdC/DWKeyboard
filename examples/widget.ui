@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Widget</string>
   </property>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QGPLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
      <x>0</x>
@@ -107,6 +107,13 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QGPLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">QGPLineEdit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
