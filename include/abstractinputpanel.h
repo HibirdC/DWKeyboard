@@ -48,6 +48,7 @@ public:
     virtual bool isVisible() const = 0;
     virtual void setInputRect(const QRect &inputRect);
 	virtual bool eventFilter(QObject *, QEvent *) = 0;
+    virtual void setOnlyNumber(bool only);
 public slots:
     virtual void createView();
     virtual void destroyView();

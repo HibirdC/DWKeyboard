@@ -80,6 +80,7 @@ protected:
 public slots:
     void FocusIn(QObject* obj);
     void FocusOut(QObject* obj);
+    void SetOnlyNumber(bool only);
 private slots:
     void keyboardRectangleChanged();
     void updateInputPanelVisible();
