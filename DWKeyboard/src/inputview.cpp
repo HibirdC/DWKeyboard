@@ -425,7 +425,7 @@ void InputDialogView::Layout()
     if(m_ViewMode == ViewCustomerNum)
     {
         double hei = 130;
-        double wid = 445;
+        double wid = 390;
         m_backgroud->setGeometry(0, 0, wid, hei);
         m_backgroud->setFixedSize(wid, hei);
         m_backgroud->setFont(deffont);
@@ -446,13 +446,13 @@ void InputDialogView::Layout()
         { 
             int ax = margin + i * (btnWidth+padding);
             int ay = margin_top;
-            if(i == 7 || i == 8 || i == 9)
+            if(i == 6 || i == 7 || i == 8 || i == 9)
             {
                 continue;
             }
             if(i == 10)
             {
-                ax = margin + 7 * (btnWidth+padding);
+                ax = margin + 6 * (btnWidth+padding);
             }
             m_btnLine1[i]->setGeometry(ax, ay, btnWidth, btnHeight);
             m_btnLine1[i]->setFont(deffont);
@@ -468,9 +468,9 @@ void InputDialogView::Layout()
             switch (i)
             {
             case 0:
-                aw = btnWidth * 2.3-2;
-                m_btnLine4[i]->setGeometry(ax+i, ay, aw, btnHeight);
-                m_btnLine4[i]->setFont(deffont);
+                aw = btnWidth;
+                m_btnLine1[6]->setGeometry(ax+i, ay, btnWidth, btnHeight);
+                m_btnLine1[6]->setFont(deffont);
                 break;
             case 1:
                 aw = btnWidth;
@@ -661,7 +661,7 @@ void InputDialogView::SwitchViewMode(InputDialogView::ViewMode mode)
         {
             if (m_btnLine4[i])
             {
-                if(i == 1 || i == 2)
+                if(i == 0 || i == 1 || i == 2)
                 {
                     m_btnLine4[i]->setVisible(false);
                 }

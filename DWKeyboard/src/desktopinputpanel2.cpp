@@ -116,10 +116,10 @@ void DesktopInputPanel2::show(QObject* focusobj)
             if(d->view->GetViewMode() == InputDialogView::ViewMode::ViewCustomerNum)
             {
                 int hei = 130;
-                int wid = 445;
+                int wid = 390;
                 if (x + wid > rcScreen.right())
                 {
-                    x = rcScreen.right() - wid + 300;
+                    x = rcScreen.right() - wid;
                 }
                 if (x < rcScreen.left())
                 {
@@ -128,7 +128,7 @@ void DesktopInputPanel2::show(QObject* focusobj)
                 }
                 if (y + hei > rcScreen.bottom())
                 {
-                    y = pt.y() - hei/2 - 15;
+                    y = pt.y() - hei - 1;
                 }
                 if (y < rcScreen.top())
                 {
