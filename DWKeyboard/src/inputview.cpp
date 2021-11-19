@@ -100,20 +100,24 @@ InputDialogView::~InputDialogView()
 const int line1Value[InputDialogView::ViewMask][11] = {
     {Qt::Key_Q, Qt::Key_W, Qt::Key_E, Qt::Key_R, Qt::Key_T, Qt::Key_Y, Qt::Key_U, Qt::Key_I, Qt::Key_O, Qt::Key_P, Qt::Key_Backspace},
     {Qt::Key_1, Qt::Key_2, Qt::Key_3, Qt::Key_4, Qt::Key_5, Qt::Key_6, Qt::Key_7, Qt::Key_8, Qt::Key_9, Qt::Key_0, Qt::Key_Backspace},
+    {Qt::Key_1, Qt::Key_2, Qt::Key_3, Qt::Key_4, Qt::Key_5, Qt::Key_6, Qt::Key_7, Qt::Key_8, Qt::Key_9, Qt::Key_0, Qt::Key_Backspace},
     {Qt::Key_1, Qt::Key_2, Qt::Key_3, Qt::Key_4, Qt::Key_5, Qt::Key_6, Qt::Key_7, Qt::Key_8, Qt::Key_9, Qt::Key_0, Qt::Key_Backspace}
 };
 const int line2Value[InputDialogView::ViewMask][10] = {
     {Qt::Key_A, Qt::Key_S, Qt::Key_D, Qt::Key_F, Qt::Key_G, Qt::Key_H, Qt::Key_J, Qt::Key_K, Qt::Key_L, Qt::Key_Enter},
     {Qt::Key_Plus, Qt::Key_Minus, Qt::Key_division, Qt::Key_multiply, Qt::Key_Asterisk, Qt::Key_Equal, Qt::Key_Underscore, Qt::Key_Semicolon, Qt::Key_Colon, Qt::Key_Enter},
-    {Qt::Key_QuoteLeft, Qt::Key_AsciiTilde, Qt::Key_Exclam, Qt::Key_At, Qt::Key_NumberSign, Qt::Key_Dollar, Qt::Key_Percent, Qt::Key_AsciiCircum, Qt::Key_Ampersand, Qt::Key_Enter}
+    {Qt::Key_QuoteLeft, Qt::Key_AsciiTilde, Qt::Key_Exclam, Qt::Key_At, Qt::Key_NumberSign, Qt::Key_Dollar, Qt::Key_Percent, Qt::Key_AsciiCircum, Qt::Key_Ampersand, Qt::Key_Enter},
+    {Qt::Key_Plus, Qt::Key_Minus, Qt::Key_division, Qt::Key_multiply, Qt::Key_Asterisk, Qt::Key_Equal, Qt::Key_Underscore, Qt::Key_Semicolon, Qt::Key_Colon, Qt::Key_Enter}
 };
 const int line3Value[InputDialogView::ViewMask][11] = {
     {Qt::Key_Shift, Qt::Key_Z, Qt::Key_X, Qt::Key_C, Qt::Key_V, Qt::Key_B, Qt::Key_N, Qt::Key_M, Qt::Key_Comma, Qt::Key_Period, Qt::Key_Shift},
     {Key_Pager, Qt::Key_Apostrophe, Key_ApostropheRight, Qt::Key_QuoteDbl, Key_QuoteDblRight, Qt::Key_Comma, 	Qt::Key_Period, Qt::Key_Slash, Qt::Key_Bar, Qt::Key_Backslash, Key_Pager},
-    {Key_Pager, Qt::Key_ParenLeft, Qt::Key_ParenRight, Qt::Key_BracketLeft, Qt::Key_BracketRight, Qt::Key_BraceLeft, Qt::Key_BraceRight, Qt::Key_Less, Qt::Key_Greater, Qt::Key_Question, Key_Pager}
+    {Key_Pager, Qt::Key_ParenLeft, Qt::Key_ParenRight, Qt::Key_BracketLeft, Qt::Key_BracketRight, Qt::Key_BraceLeft, Qt::Key_BraceRight, Qt::Key_Less, Qt::Key_Greater, Qt::Key_Question, Key_Pager},
+    {Key_Pager, Qt::Key_Apostrophe, Key_ApostropheRight, Qt::Key_QuoteDbl, Key_QuoteDblRight, Qt::Key_Comma, 	Qt::Key_Period, Qt::Key_Slash, Qt::Key_Bar, Qt::Key_Backslash, Key_Pager}
 };
 const int line4Value[InputDialogView::ViewMask][5] = {
     {Key_SwitchNumber, Key_SwitchLanguage, Qt::Key_Space, Qt::Key_Question, Key_Exit},
+    {Key_SwitchABC, Key_SwitchLanguage, Qt::Key_Space, Qt::Key_Period, Key_Exit},
     {Key_SwitchABC, Key_SwitchLanguage, Qt::Key_Space, Qt::Key_Period, Key_Exit},
     {Key_SwitchABC, Key_SwitchLanguage, Qt::Key_Space, Qt::Key_Period, Key_Exit}
 };
@@ -388,6 +392,7 @@ QString InputDialogView::GetValueText(int key, bool bshift, bool bcaplock, Input
         case ViewABC: break;
         case ViewNum0:return bEn ? QStringLiteral("↓") : QStringLiteral("↓");break;	// 下一页
         case ViewNum1:return bEn ? QStringLiteral("↑") : QStringLiteral("↑");break;	// 下一页
+        case ViewCustomerNum:return bEn ? QStringLiteral("↓") : QStringLiteral("↓");break;	// 下一页
         }
         break;
     case Qt::Key_Backspace:	return QStringLiteral("");break;						// 删除
@@ -417,7 +422,7 @@ void InputDialogView::Layout()
     数字 hei: 480  wid: 640  margin: 19.2  margin_top: 19.2  padding: 19.2  margin_bottom: 19.2  btnHeight: 96  btnWidth: 37.2364
     hei: 240  wid: 600  margin: 18  margin_top: 27  padding: 9.6  margin_bottom: 9.6  btnHeight: 43.65  btnWidth: 42.5455
     */
-    if(m_ViewMode == ViewNum0)
+    if(m_ViewMode == ViewCustomerNum)
     {
         double hei = 130;
         double wid = 445;
@@ -616,14 +621,14 @@ void InputDialogView::SwitchShiftMode()
 //外部调用
 void InputDialogView::SetOnlyNumer(bool only)
 {
-    SwitchViewMode(only?ViewNum0:ViewABC);
+    SwitchViewMode(only?ViewCustomerNum:ViewABC);
 }
 
 // 切换显示模式
 void InputDialogView::SwitchViewMode(InputDialogView::ViewMode mode)
 {
     m_ViewMode = mode;
-    if(mode == ViewNum0)
+    if(mode == ViewCustomerNum)
     {
         // 第一行
         for (int i = 0; i < 11; i++)
