@@ -113,7 +113,7 @@ void DesktopInputPanel2::show(QObject* focusobj)
 
             int x = pt.x();
             int y = pt.y() + rc.height() + 1;
-            if(d->view->GetViewMode() == InputDialogView::ViewMode::ViewNum0)
+            if(d->view->GetViewMode() == InputDialogView::ViewMode::ViewCustomerNum)
             {
                 int hei = 130;
                 int wid = 445;

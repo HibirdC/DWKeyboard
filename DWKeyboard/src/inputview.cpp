@@ -386,9 +386,9 @@ QString InputDialogView::GetValueText(int key, bool bshift, bool bcaplock, Input
         switch (m_ViewMode)
         {
         case ViewABC: break;
-            case ViewNum0:return bEn ? QStringLiteral("↓") : QStringLiteral("↓");break;	// 下一页
-            case ViewNum1:return bEn ? QStringLiteral("↑") : QStringLiteral("↑");break;	// 下一页
-			}
+        case ViewNum0:return bEn ? QStringLiteral("↓") : QStringLiteral("↓");break;	// 下一页
+        case ViewNum1:return bEn ? QStringLiteral("↑") : QStringLiteral("↑");break;	// 下一页
+        }
         break;
     case Qt::Key_Backspace:	return QStringLiteral("");break;						// 删除
     case Qt::Key_Enter:		return QStringLiteral("");break;						// Enter
@@ -623,42 +623,86 @@ void InputDialogView::SetOnlyNumer(bool only)
 void InputDialogView::SwitchViewMode(InputDialogView::ViewMode mode)
 {
     m_ViewMode = mode;
-    // 第一行
-    for (int i = 0; i < 11; i++)
+    if(mode == ViewNum0)
     {
-        if (m_btnLine1[i])
-            m_btnLine1[i]->setUserData(Qt::UserRole, new KeyBoardData(line1Value[m_ViewMode][i]));
-    }
-    // 第二行
-    for (int i = 0; i < 10; i++)
-    {
-        if (m_btnLine2[i])
+        // 第一行
+        for (int i = 0; i < 11; i++)
         {
-            m_btnLine2[i]->setVisible(mode != ViewNum0);
-            m_btnLine2[i]->setUserData(Qt::UserRole, new KeyBoardData(line2Value[m_ViewMode][i]));
+            if (m_btnLine1[i])
+                m_btnLine1[i]->setUserData(Qt::UserRole, new KeyBoardData(line1Value[m_ViewMode][i]));
         }
-    }
-
-    // 第三行
-    for (int i = 0; i < 11; i++)
-    {
-        if (m_btnLine3[i])
+        // 第二行
+        for (int i = 0; i < 10; i++)
         {
-            m_btnLine3[i]->setVisible(mode != ViewNum0);
-            m_btnLine3[i]->setUserData(Qt::UserRole, new KeyBoardData(line3Value[m_ViewMode][i]));
-        }
-    }
-
-    // 第四行
-    for (int i = 0; i < 5; i++)
-    {
-        if (m_btnLine4[i])
-        {
-            if(i == 1 || i == 2)
+            if (m_btnLine2[i])
             {
-                m_btnLine4[i]->setVisible(mode != ViewNum0);
+                m_btnLine2[i]->setVisible(false);
+                m_btnLine2[i]->setUserData(Qt::UserRole, new KeyBoardData(line2Value[m_ViewMode][i]));
             }
-            m_btnLine4[i]->setUserData(Qt::UserRole, new KeyBoardData(line4Value[m_ViewMode][i]));
+        }
+
+        // 第三行
+        for (int i = 0; i < 11; i++)
+        {
+            if (m_btnLine3[i])
+            {
+                m_btnLine3[i]->setVisible(false);
+                m_btnLine3[i]->setUserData(Qt::UserRole, new KeyBoardData(line3Value[m_ViewMode][i]));
+            }
+        }
+
+        // 第四行
+        for (int i = 0; i < 5; i++)
+        {
+            if (m_btnLine4[i])
+            {
+                if(i == 1 || i == 2)
+                {
+                    m_btnLine4[i]->setVisible(false);
+                }
+                m_btnLine4[i]->setUserData(Qt::UserRole, new KeyBoardData(line4Value[m_ViewMode][i]));
+            }
+        }
+    }
+    else
+    {
+        // 第一行
+        for (int i = 0; i < 11; i++)
+        {
+            if (m_btnLine1[i])
+            {
+                m_btnLine1[i]->setVisible(true);
+                m_btnLine1[i]->setUserData(Qt::UserRole, new KeyBoardData(line1Value[m_ViewMode][i]));
+            }
+        }
+        // 第二行
+        for (int i = 0; i < 10; i++)
+        {
+            if (m_btnLine2[i])
+            {
+                m_btnLine2[i]->setVisible(true);
+                m_btnLine2[i]->setUserData(Qt::UserRole, new KeyBoardData(line2Value[m_ViewMode][i]));
+            }
+        }
+
+        // 第三行
+        for (int i = 0; i < 11; i++)
+        {
+            if (m_btnLine3[i])
+            {
+                m_btnLine3[i]->setVisible(true);
+                m_btnLine3[i]->setUserData(Qt::UserRole, new KeyBoardData(line3Value[m_ViewMode][i]));
+            }
+        }
+
+        // 第四行
+        for (int i = 0; i < 5; i++)
+        {
+            if (m_btnLine4[i])
+            {
+                m_btnLine4[i]->setVisible(true);
+                m_btnLine4[i]->setUserData(Qt::UserRole, new KeyBoardData(line4Value[m_ViewMode][i]));
+            }
         }
     }
 
