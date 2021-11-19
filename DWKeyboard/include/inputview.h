@@ -62,7 +62,8 @@ public:
 		ViewABC = 0,
 		ViewNum0 = 1,
 		ViewNum1 = 2,
-		ViewMask = 3
+        ViewMask = 3,
+        ViewCustomerNum = 4,
 	};
 private:
 	void InitControl();
@@ -114,6 +115,7 @@ public slots:
 	void OnListWidgetItemClick(QListWidgetItem * item);
 signals:
 	void sizeChanged();
+    void modeChanged();
 protected:
 	void resizeEvent(QResizeEvent *event);
 public:

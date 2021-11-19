@@ -103,9 +103,6 @@ void DesktopInputPanel2::show(QObject* focusobj)
     AppInputPanel::show(focusobj);
     Q_D(DesktopInputPanel2);
     if (d->view) {
-//      repositionView(QGuiApplication::primaryScreen()->availableGeometry());
-//      QRect rc = QGuiApplication::screens().at(0)->availableGeometry();
-//      repositionView(QRect(rc.x(), rc.height() - 400, rc.width(), 400));
         QWidget *w = qobject_cast<QWidget*>(focusobj);
         if (w)
         {
@@ -116,36 +113,54 @@ void DesktopInputPanel2::show(QObject* focusobj)
 
             int x = pt.x();
             int y = pt.y() + rc.height() + 1;
-
-            int hei = 240;
-            int wid = 600;
-            if (x + wid > rcScreen.right())
+            if(d->view->GetViewMode() == InputDialogView::ViewMode::ViewNum0)
             {
-                x = rcScreen.right() - wid;
-                if(d->view->GetViewMode() == InputDialogView::ViewMode::ViewNum0)
+                int hei = 130;
+                int wid = 445;
+                if (x + wid > rcScreen.right())
                 {
                     x = rcScreen.right() - wid + 300;
                 }
-            }
-            if (x < rcScreen.left())
-            {
-                wid = wid + x - rcScreen.left();
-                x = rcScreen.left();
-            }
-            if (y + hei > rcScreen.bottom())
-            {
-                y = pt.y() - hei - 1;
-                if(d->view->GetViewMode() == InputDialogView::ViewMode::ViewNum0)
+                if (x < rcScreen.left())
+                {
+                    wid = wid + x - rcScreen.left();
+                    x = rcScreen.left();
+                }
+                if (y + hei > rcScreen.bottom())
                 {
                     y = pt.y() - hei/2 - 15;
                 }
+                if (y < rcScreen.top())
+                {
+                    hei = hei + y - rcScreen.top();
+                    y = rcScreen.top();
+                }
+                repositionView(QRect(x, y, wid, hei));
             }
-            if (y < rcScreen.top())
+            else
             {
-                hei = hei + y - rcScreen.top();
-                y = rcScreen.top();
+                int hei = 240;
+                int wid = 600;
+                if (x + wid > rcScreen.right())
+                {
+                    x = rcScreen.right() - wid;
+                }
+                if (x < rcScreen.left())
+                {
+                    wid = wid + x - rcScreen.left();
+                    x = rcScreen.left();
+                }
+                if (y + hei > rcScreen.bottom())
+                {
+                    y = pt.y() - hei - 1;
+                }
+                if (y < rcScreen.top())
+                {
+                    hei = hei + y - rcScreen.top();
+                    y = rcScreen.top();
+                }
+                repositionView(QRect(x, y, wid, hei));
             }
-            repositionView(QRect(x, y, wid, hei));
         }
         d->view->show();
     }

@@ -125,7 +125,6 @@ void InputDialogView::InitControl()
     deffont.setPixelSize(15);
     //////////////////////////////////////////////////////////////////////////
     m_backgroud = new QWidget(this);
-
     // 提示器
     m_ListWidget = new QListWidget(m_backgroud);
     m_ListWidget->setViewMode(QListView::ListMode);
@@ -412,26 +411,30 @@ void InputDialogView::Layout()
         return;
     //////////////////////////////////////////////////////////////////////////
     QFont deffont("Sans");
-    deffont.setPixelSize(width()/40);
+    deffont.setPixelSize(15);
+    /*
 
+    数字 hei: 480  wid: 640  margin: 19.2  margin_top: 19.2  padding: 19.2  margin_bottom: 19.2  btnHeight: 96  btnWidth: 37.2364
+    hei: 240  wid: 600  margin: 18  margin_top: 27  padding: 9.6  margin_bottom: 9.6  btnHeight: 43.65  btnWidth: 42.5455
+    */
     if(m_ViewMode == ViewNum0)
     {
-        int oriHeight = height()/2;
-        int oriWidth = width()*3/4-5;
-        m_backgroud->setGeometry(0, 0, oriWidth, oriHeight*1.1);
-        m_backgroud->setFixedSize(oriWidth, oriHeight*1.1);
+        double hei = 130;
+        double wid = 445;
+        m_backgroud->setGeometry(0, 0, wid, hei);
+        m_backgroud->setFixedSize(wid, hei);
         m_backgroud->setFont(deffont);
-        double hei = height();
-        double wid = width();
-        double margin = wid * 3 / 100;	// 左右边缘
+
+
+        double margin = 18;	// 左右边缘
         double margin_top = margin;	// 上边缘
-        double padding = hei * 1 / 25;	// 间隔
+        double padding = 9.6;	// 间隔
         double margin_bottom = padding;// 下边缘
 
-        const double btnHeight = (hei - margin_top - margin_bottom - 3 * padding)/4;
-        const double btnWidth = (wid - margin*2 - padding*10)/11;
+        const double btnHeight = 43.65;
+        const double btnWidth = 42.5455;
 
-        m_ListWidget->setGeometry(0, 0, width(), margin_top - padding);
+        m_ListWidget->setGeometry(0, 0, wid, hei);
         m_ListWidget->setFont(deffont);
         // 第一行
         for (int i = 0; i < 11; i++)
@@ -461,32 +464,32 @@ void InputDialogView::Layout()
             {
             case 0:
                 aw = btnWidth * 2.3-2;
-                m_btnLine4[i]->setGeometry(ax, ay, aw, btnHeight);
+                m_btnLine4[i]->setGeometry(ax+i, ay, aw, btnHeight);
                 m_btnLine4[i]->setFont(deffont);
                 break;
             case 1:
                 aw = btnWidth;
-                m_btnLine1[7]->setGeometry(ax, ay, btnWidth, btnHeight);
+                m_btnLine1[7]->setGeometry(ax+i, ay, btnWidth, btnHeight);
                 m_btnLine1[7]->setFont(deffont);
                 break;
             case 2:
                 aw = btnWidth;
-                m_btnLine1[8]->setGeometry(ax, ay, btnWidth, btnHeight);
+                m_btnLine1[8]->setGeometry(ax+1, ay, btnWidth, btnHeight);
                 m_btnLine1[8]->setFont(deffont);
                 break;
             case 3:
                 aw = btnWidth;
-                m_btnLine1[9]->setGeometry(ax, ay, btnWidth, btnHeight);
+                m_btnLine1[9]->setGeometry(ax+2, ay, btnWidth, btnHeight);
                 m_btnLine1[9]->setFont(deffont);
                 break;
             case 4:
                 aw = btnWidth;
-                m_btnLine4[i-1]->setGeometry(ax, ay, aw, btnHeight);
+                m_btnLine4[i-1]->setGeometry(ax+3, ay, aw, btnHeight);
                 m_btnLine4[i-1]->setFont(deffont);
                 break;
             case 5:
-                aw = wid*3/4 - margin - ax - 5;
-                m_btnLine4[i-1]->setGeometry(ax, ay, aw, btnHeight);
+                aw = btnWidth * 2.3-2;
+                m_btnLine4[i-1]->setGeometry(ax+4, ay, aw, btnHeight);
                 m_btnLine4[i-1]->setFont(deffont);
                 break;
             }
@@ -495,12 +498,13 @@ void InputDialogView::Layout()
     }
     else
     {
-        m_backgroud->setGeometry(0, 0, width(), height());
-        m_backgroud->setFixedSize(width(), height());
+        double hei = 240;
+        double wid = 600;
+
+        m_backgroud->setGeometry(0, 0, wid, hei);
+        m_backgroud->setFixedSize(wid, hei);
         m_backgroud->setFont(deffont);
 
-        double hei = height();
-        double wid = width();
         double margin = wid * 3 / 100;	// 左右边缘
         double margin_top = margin*1.5;	// 上边缘
         double padding = hei * 1 / 25;	// 间隔
@@ -509,7 +513,7 @@ void InputDialogView::Layout()
         const double btnHeight = (hei - margin_top - margin_bottom - 3 * padding)/4;
         const double btnWidth = (wid - margin*2 - padding*10)/11;
 
-        m_ListWidget->setGeometry(0, 0, width(), margin_top - padding);
+        m_ListWidget->setGeometry(0, 0, wid, margin_top - padding);
         m_ListWidget->setFont(deffont);
         // 第一行
         for (int i = 0; i < 11; i++)
