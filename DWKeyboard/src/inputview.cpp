@@ -621,6 +621,12 @@ void InputDialogView::SwitchShiftMode()
 //外部调用
 void InputDialogView::SetOnlyNumer(bool only)
 {
+    if(only && InputContextBase != nullptr && PlainInputMethodBase != nullptr)
+    {
+        InputContextBase->setLocale("en_GB");
+        InputEngineBase->setInputMethod(PlainInputMethodBase);
+        InputEngineBase->setInputMode(InputEngine::Latin);
+    }
     SwitchViewMode(only?ViewCustomerNum:ViewABC);
 }
 

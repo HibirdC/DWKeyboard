@@ -62,8 +62,8 @@ public:
 		ViewABC = 0,
 		ViewNum0 = 1,
 		ViewNum1 = 2,
-        ViewMask = 3,
-        ViewCustomerNum = 4,
+        ViewCustomerNum = 3,
+        ViewMask = 4,
 	};
 private:
 	void InitControl();
